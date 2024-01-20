@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  stockapp.api:
+    image: ${DOCKER_REGISTRY-}stockappapi
+    build:
+      context: .
+      dockerfile: StockApp.Api/Dockerfile
+
+  stockapp.front:
+    image: ${DOCKER_REGISTRY-}stockappfront
+    build:
+      context: .
+      dockerfile: StockApp.Front/Dockerfile
+
