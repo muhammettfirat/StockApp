@@ -1,0 +1,83 @@
+﻿@model StockUnitListModel
+@{
+    Layout = "_Layout";
+}
+
+
+<div class="card bg-secondary text-light">
+    <h4 class="card-header">Detaylar</h4>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">
+               Id
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt class="col-sm-3">
+               Code
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Code)
+            </dd>
+            <dt class="col-sm-3">
+               Description
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class="col-sm-3">
+               Type
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Type)   
+            </dd>
+            <dt class="col-sm-3">
+                StockTypeId
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.StockTypeId)
+            </dd>
+            <dt class="col-sm-3">
+               BuyingPrice
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.BuyingPrice)    
+            </dd>
+            <dt class="col-sm-3">
+                BuyingCurrency
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.BuyingCurrency)
+            </dd>
+            <dt class="col-sm-3">
+               SellingPrice
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.SellingPrice)    
+            </dd>
+            <dt class="col-sm-3">
+               SellingCurrency
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.SellingCurrency)
+            </dd>
+            <dt class="col-sm-3">
+                PaperWeight
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.PaperWeight)     
+            </dd>
+            <dt class="col-sm-3">
+                Approval
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Approval)
+            </dd>
+        </dl>
+    </div>
+    <div class="card-footer">
+        <a asp-action="Update" asp-route-id="@Model?.Id" class="btn btn-primary">Düzenle</a> |
+        <a asp-action="List" class="btn btn-secondary">Listeye Geri Dön</a>
+    </div>
+</div>

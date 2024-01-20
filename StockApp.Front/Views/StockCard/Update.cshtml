@@ -1,0 +1,60 @@
+﻿@model StockCardListModel
+@{
+    Layout = "_Layout";
+}
+
+<form class="w-75 m-5 p-3  mx-auto" asp-action="Update" asp-controller="StockCard" method="post">
+    <input type="hidden" asp-for="@Model.Id" />
+
+    <div class="mb-3">
+        <label for="@Model.Code" class="form-label">Code :</label>
+        <span asp-validation-for="@Model.Code" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.Code" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.ProductType" class="form-label">ProductType :</label>
+        <span asp-validation-for="@Model.ProductType" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.ProductType" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.Description" class="form-label">Description :</label>
+        <span asp-validation-for="@Model.Description" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.Description" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.StockTypeId" class="form-label">StockTypeId :</label>
+        <span asp-validation-for="@Model.StockTypeId" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.StockTypeId" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.StockUnitId" class="form-label">StockUnitId :</label>
+        <span asp-validation-for="@Model.StockUnitId" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.StockUnitId" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.ShelfInformation" class="form-label">ShelfInformation :</label>
+        <span asp-validation-for="@Model.ShelfInformation" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.ShelfInformation" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.CabinetInformation" class="form-label">CabinetInformation :</label>
+        <span asp-validation-for="@Model.CabinetInformation" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.CabinetInformation" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.Amount" class="form-label">Amount :</label>
+        <span asp-validation-for="@Model.Amount" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.Amount" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.CriticalQuantity" class="form-label">CriticalQuantity :</label>
+        <span asp-validation-for="@Model.CriticalQuantity" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.CriticalQuantity" />
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-primary w-100">Kaydet</button>
+    </div>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger">
+    </div>
+</form>

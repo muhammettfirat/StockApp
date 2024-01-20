@@ -1,0 +1,24 @@
+﻿@model CreateStockTypeModel
+@{
+    Layout = "_Layout";
+}
+
+<form class="w-75 m-5 p-3  mx-auto" asp-action="Create" asp-controller="StockType" method="post">
+    <div class="mb-3">
+        <label for="@Model.Name" class="form-label">Stock  Türü :</label>
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.Name" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.Approval" class="form-label">Durum :</label>
+        <span asp-validation-for="@Model.Approval" class="text-danger"></span>
+        <input type="checkbox" class="form-control" asp-for="@Model.Approval" />
+    </div>
+   
+    <div class="mb-3">
+        <button class="btn btn-primary w-100">Kaydet</button>
+    </div>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger">
+    </div>
+</form>

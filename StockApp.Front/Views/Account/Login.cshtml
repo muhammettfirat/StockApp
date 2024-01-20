@@ -1,0 +1,55 @@
+﻿@model UserLoginModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <title></title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #000d1a; /* Siyah arka plan */
+            color: white; /* Beyaz yazı rengi */
+        }
+
+        /* Formu ortala */
+        .center-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="container center-form">
+        <form class="w-75 p-3 shadow mx-auto" asp-action="Login" asp-controller="Account" method="post">
+            <div class="mb-3">
+                <label for="@Model.UserName" class="form-label">Kullanıcı Adı</label>
+                <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+                <input type="text" class="form-control" asp-for="@Model.UserName" />
+            </div>
+            <div class="mb-3">
+                <label for="@Model.Password" class="form-label">Şifre</label>
+                <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                <input type="password" class="form-control" asp-for="@Model.Password" />
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" asp-for="@Model.RememberMe" />
+                <label class="form-check-label" for="@Model.RememberMe">Remember Me</label>
+                <span asp-validation-for="@Model.RememberMe" class="text-danger"></span>
+            </div>
+            <div class="mb-3"> <button type="submit" class="btn btn-primary">Giriş Yap</button></div>
+           
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </form>
+    </div>
+    <!-- Bootstrap JS ve jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Ek JS dosyalarını buraya ekleyebilirsiniz -->
+</body>
+</html>

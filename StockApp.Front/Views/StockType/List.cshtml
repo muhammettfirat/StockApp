@@ -1,0 +1,44 @@
+﻿@model List<StockTypeListModel>
+@{
+    Layout = "_Layout";
+}
+
+@{
+    
+        <div class="text-end ">
+            <a asp-action="Create" class="btn btn-primary btn-sm" asp-controller="StockType">Yeni Kayıt Oluştur</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>Approval</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var stockType in Model)
+                {
+                    <tr>
+                        <td>
+                            @stockType.Id
+
+                        </td>
+                        <td>
+                            @stockType.Name
+                        </td>
+                        <td>
+                            @stockType.Approval
+                        </td>
+                       
+                        <td>
+                            <a asp-action="Update" asp-controller="StockType" asp-route-id="@stockType.Id" class="btn btn-warning btn-sm">Update</a>
+                            <a asp-action="Remove" asp-controller="StockType" asp-route-id="@stockType.Id" class="btn btn-danger btn-sm">Sil</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+   
+}

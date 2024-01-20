@@ -1,0 +1,71 @@
+﻿@model List<StockCardListModel>
+@{
+    Layout = "_Layout";
+}
+
+@{
+
+    <div class="text-end">
+        <a asp-action="Create" class="btn btn-primary btn-sm" asp-controller="StockCard">Yeni Kayıt Oluştur</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Code</td>
+                <td>ProductType</td>
+                <td>Description</td>
+                <td>StockTypeId</td>
+                <td>StockUnitId</td>
+                <td>ShelfInformation</td>
+                <td>CabinetInformation</td>
+                <td>Amount</td>
+                <td>CriticalQuantity</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var stockCard in Model)
+            {
+                <tr>
+                    <td>
+                        @stockCard.Id
+
+                    </td>
+                    <td>
+                        @stockCard.Code
+                    </td>
+                    <td>
+                        @stockCard.ProductType
+                    </td>
+                    <td>
+                        @stockCard.Description
+                    </td>
+                    <td>
+                        @stockCard.StockTypeId
+                    </td>
+                    <td>
+                        @stockCard.StockUnitId
+                    </td>
+                    <td>
+                        @stockCard.ShelfInformation
+                    </td>
+                    <td>
+                        @stockCard.CabinetInformation
+                    </td>
+                    <td>
+                        @stockCard.Amount
+                    </td>
+                    <td>
+                        @stockCard.CriticalQuantity
+                    </td>
+                    <td>
+                        <a asp-action="Update" asp-controller="StockCard" asp-route-id="@stockCard.Id" class="btn btn-warning btn-sm">Update</a>
+                        <a asp-action="Remove" asp-controller="StockCard" asp-route-id="@stockCard.Id" class="btn btn-danger btn-sm">Sil</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+}

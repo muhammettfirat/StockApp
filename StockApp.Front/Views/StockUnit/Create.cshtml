@@ -1,0 +1,70 @@
+﻿@model CreateStockUnitModel
+@{
+    Layout = "_Layout";
+}
+
+<form class="w-75 m-5 p-3  mx-auto" asp-action="Create" asp-controller="StockUnit" method="post">
+    <div class="mb-3">
+        <label for="@Model.Code" class="form-label">Code :</label>
+        <span asp-validation-for="@Model.Code" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.Code" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.Description" class="form-label">Description :</label>
+        <span asp-validation-for="@Model.Description" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.Description" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.Type" class="form-label">Type :</label>
+        <span asp-validation-for="@Model.Type" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.Type" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.StockTypeId" class="form-label">StockTypeId :</label>
+        <span asp-validation-for="@Model.StockTypeId" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.StockTypeId" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.BuyingPrice" class="form-label">BuyingPrice :</label>
+        <span asp-validation-for="@Model.BuyingPrice" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.BuyingPrice" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.BuyingCurrency" class="form-label">BuyingCurrency :</label>
+        <span asp-validation-for="@Model.BuyingCurrency" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.BuyingCurrency" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.SellingPrice" class="form-label">SellingPrice :</label>
+        <span asp-validation-for="@Model.SellingPrice" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.SellingPrice" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.SellingCurrency" class="form-label">SellingCurrency :</label>
+        <span asp-validation-for="@Model.SellingCurrency" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.SellingCurrency" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.PaperWeight" class="form-label">PaperWeight :</label>
+        <span asp-validation-for="@Model.PaperWeight" class="text-danger"></span>
+        <input type="text" class="form-control" asp-for="@Model.PaperWeight" />
+    </div>
+    <div class="mb-3">
+        <label for="@Model.Approval" class="form-label">Durum :</label>
+        <span asp-validation-for="@Model.Approval" class="text-danger"></span>
+        <input type="checkbox" class="form-control" asp-for="@Model.Approval" />
+    </div>
+   
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Kayıt Oluştur</button>
+        <a asp-action="List" asp-controller="StockUnit" class="btn btn-secondary">Listeye Geri Dön</a>
+    </div>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger">
+    </div>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

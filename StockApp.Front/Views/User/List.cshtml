@@ -1,0 +1,59 @@
+﻿
+@model List<GetListUserModel>
+@{
+    Layout = "_Layout";
+}
+
+@{
+   
+        <div class="text-end">
+            <a asp-action="Create" class="btn btn-primary btn-sm" asp-controller="User">Yeni Kayıt Oluştur</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>UserName</td>
+                    <td>Email</td>
+                    <td>Password</td>
+                    <td>AppRoleId</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>
+                            @user.Id
+
+                        </td>
+                        <td>
+                            @user.Name
+                        </td>
+                        <td>
+                            @user.UserName
+                        </td>
+                        <td>
+                            @user.Email
+                        </td>
+                        <td>
+                            @user.Password
+                        </td>
+                        <td>
+                         
+                            user.AppRoleId
+                           
+                        </td>
+                        <td>
+                            <a asp-action="Update" asp-controller="User" asp-route-id="@user.Id" class="btn btn-warning btn-sm">Update</a>
+                            <a asp-action="Remove" asp-controller="User" asp-route-id="@user.Id" class="btn btn-danger btn-sm">Sil</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+   
+}

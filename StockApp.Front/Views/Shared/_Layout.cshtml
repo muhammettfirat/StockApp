@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Ek stil dosyalarını buraya ekleyebilirsiniz -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            padding-top: 56px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background-color: #000d1a;
+
+            color: #fff;
+        }
+
+            .sidebar a {
+                padding: 15px;
+                text-decoration: none;
+                color: #fff;
+                display: block;
+            }
+
+                .sidebar a:hover {
+                    background: #495057;
+                }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Yan Menü -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h3>Admin Dashboard</h3>
+        </div>
+        <ul class="list-unstyled">
+            <li><a href="#">Anasayfa</a></li>
+           
+            <li><a asp-controller="User" asp-action="List">Kullanıcı</a></li>
+            <li><a asp-controller="StockType" asp-action="List">Stok Tipi</a></li>
+            <li><a asp-controller="StockUnit" asp-action="List">Stok Unit</a></li>
+            <li><a asp-controller="StockCard" asp-action="List">Stok Card</a></li>
+            <!-- Ek yan menü öğelerini buraya ekleyebilirsiniz -->
+        </ul>
+    </nav>
+
+    <!-- Ana İçerik ve Yan Menü Arasındaki İçerik Bölümü -->
+    <div class="content">
+        <div class="row">
+            <div class="col-md-9">
+                <main>
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    @*  @await RenderSectionAsync("Scripts", required: false) *@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

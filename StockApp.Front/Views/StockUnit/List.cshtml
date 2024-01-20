@@ -1,0 +1,54 @@
+﻿@model List<StockUnitListModel>
+@{
+    Layout = "_Layout";
+}
+
+@{
+
+    <div class="text-end ">
+        <a asp-action="Create" class="btn btn-primary btn-sm" asp-controller="StockUnit">Yeni Kayıt Oluştur</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>StockTypeId</th>
+                <th>BuyingPrice</th>
+                <th>BuyingCurrency</th>
+                <th>SellingPrice</th>
+                <th>SellingCurrency</th>
+                <th>PaperWeight</th>
+                <th>Approval</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var stockUnit in Model)
+            {
+                <tr>
+                    <td>@stockUnit.Id</td>
+                    <td>@stockUnit.Code</td>
+                    <td>@stockUnit.Description</td>
+                    <td>@stockUnit.Type</td>
+                    <td>@stockUnit.StockTypeId</td>
+                    <td>@stockUnit.BuyingPrice</td>
+                    <td>@stockUnit.BuyingCurrency</td>
+                    <td>@stockUnit.SellingPrice</td>
+                    <td>@stockUnit.SellingCurrency</td>
+                    <td>@stockUnit.PaperWeight</td>
+                    <td>@stockUnit.Approval</td>
+
+                    <td>
+                        <a asp-action="Update" asp-controller="StockUnit" asp-route-id="@stockUnit.Id" class="btn btn-warning btn-sm">Update</a>
+                        <a asp-action="Remove" asp-controller="StockUnit" asp-route-id="@stockUnit.Id" class="btn btn-danger btn-sm">Sil</a>
+                        <a asp-action="Get" asp-controller="StockUnit" asp-route-id="@stockUnit.Id" class="btn btn-danger btn-sm">Detay</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+}
