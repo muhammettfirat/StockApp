@@ -20,23 +20,23 @@ namespace StockApp.Api.Core.Application.Features.CQRS.Handlers.StockCardHandlers
         public async Task<Unit> Handle(UpdateStockCardCommandRequest request, CancellationToken cancellationToken)
         {
 
-            var existingGuideBook = await _repository.GetByIdAsync(request.Id);
+            var existingStockCard = await _repository.GetByIdAsync(request.Id);
 
-            if (existingGuideBook != null)
+            if (existingStockCard != null)
             {
                 // Varlık bulundu, güncelleme işlemi yapılır
-                existingGuideBook.Code = request.Code;
-                existingGuideBook.ProductType = request.ProductType;
-                existingGuideBook.Description = request.Description;
-                existingGuideBook.StockTypeId = request.StockTypeId;
-                existingGuideBook.StockUnitId = request.StockUnitId;
-                existingGuideBook.ShelfInformation = request.ShelfInformation;
-                existingGuideBook.CabinetInformation = request.CabinetInformation;
-                existingGuideBook.Amount = request.Amount;
-                existingGuideBook.CriticalQuantity = request.CriticalQuantity;
+                existingStockCard.Code = request.Code;
+                existingStockCard.ProductType = request.ProductType;
+                existingStockCard.Description = request.Description;
+                existingStockCard.StockTypeId = request.StockTypeId;
+                existingStockCard.StockUnitId = request.StockUnitId;
+                existingStockCard.ShelfInformation = request.ShelfInformation;
+                existingStockCard.CabinetInformation = request.CabinetInformation;
+                existingStockCard.Amount = request.Amount;
+                existingStockCard.CriticalQuantity = request.CriticalQuantity;
 
 
-                await _repository.UpdateAsync(existingGuideBook);
+                await _repository.UpdateAsync(existingStockCard);
             }
             // Eğer belirtilen id'ye sahip bir varlık bulunamazsa, isteğe bağlı olarak bir hata fırlatılabilir.
             else

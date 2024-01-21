@@ -18,16 +18,16 @@ namespace StockApp.Api.Core.Application.Features.CQRS.Handlers.StockTypeHandlers
         public async Task<Unit> Handle(UpdateStockTypeCommandRequest request, CancellationToken cancellationToken)
         {
 
-            var existingGuideBook = await _repository.GetByIdAsync(request.Id);
+            var existingStockType = await _repository.GetByIdAsync(request.Id);
 
-            if (existingGuideBook != null)
+            if (existingStockType != null)
             {
                 // Varlık bulundu, güncelleme işlemi yapılır
-                existingGuideBook.Name = request.Name;
-                existingGuideBook.Approval = request.Approval;
+                existingStockType.Name = request.Name;
+                existingStockType.Approval = request.Approval;
              
 
-                await _repository.UpdateAsync(existingGuideBook);
+                await _repository.UpdateAsync(existingStockType);
             }
             // Eğer belirtilen id'ye sahip bir varlık bulunamazsa, isteğe bağlı olarak bir hata fırlatılabilir.
             else
