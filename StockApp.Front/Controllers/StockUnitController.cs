@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using StockApp.Front.Modals;
 using System.Text.Json;
 using System.Text;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace StockApp.Front.Controllers
 {
@@ -32,7 +33,11 @@ namespace StockApp.Front.Controllers
                     {
                         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                     });
-
+                    var stockTypeList = await GetStockTypes();
+                    foreach (var item in result)
+                    {
+                        item.StockTypeCode = stockTypeList.FirstOrDefault(x => x.Id == item.StockTypeId)?.Name;
+                    }
                     return View(result);
                 }
             }
@@ -52,10 +57,41 @@ namespace StockApp.Front.Controllers
 
             return RedirectToAction("List");
         }
-
-        public IActionResult Create()
+        private async Task<List<LookupModel>> GetStockTypes()
         {
-            return View(new CreateStockUnitModel());
+            var token = User.Claims.FirstOrDefault(x => x.Type == "accesToken")?.Value;
+            if (token != null)
+            {
+                var client = _httpClientFactory.CreateClient();
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                var response = await client.GetAsync("https://localhost:7038/api/StockTypes");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonData = await response.Content.ReadAsStringAsync();
+                    var result = JsonSerializer.Deserialize<List<LookupModel>>(jsonData, new JsonSerializerOptions
+                    {
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                    });
+
+                    return result;
+                }
+            }
+
+            return new List<LookupModel>();
+        }
+        public async Task<IActionResult> Create()
+        {
+            var stockTypeList = await GetStockTypes(); // Assuming this method returns List<StockTypeLookupModel>
+
+            var model = new CreateStockUnitModel
+            {
+
+                StockTypeList = stockTypeList?.Select(x => new SelectListItem { Value = x.Id, Text = x.Name }).ToList() ?? new List<SelectListItem>()
+            };
+
+            return View(model);
         }
 
         [HttpPost]
@@ -130,7 +166,22 @@ namespace StockApp.Front.Controllers
                     {
                         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                     });
-
+                    var stockTypeList = await GetStockTypes();
+                    var updateModel = new StockUnitListModel
+                    {
+                        Id = result.Id,
+                        Code = result.Code,
+                        Description = result.Description,
+                        Type = result.Type,
+                        StockTypeId = result.StockTypeId,
+                        BuyingPrice = result.BuyingPrice,
+                        BuyingCurrency = result.BuyingCurrency,
+                        SellingCurrency = result.SellingCurrency,
+                        SellingPrice = result.SellingPrice,
+                        PaperWeight = result.PaperWeight,
+                        Approval = result.Approval,
+                        StockTypeList = stockTypeList?.Select(x => new SelectListItem { Value = x.Id, Text = x.Name }).ToList() ?? new List<SelectListItem>(),
+                    };
                     return View(result);
                 }
             }

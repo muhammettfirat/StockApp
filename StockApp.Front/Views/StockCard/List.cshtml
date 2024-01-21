@@ -16,7 +16,9 @@
                 <td>ProductType</td>
                 <td>Description</td>
                 <td>StockTypeId</td>
+                // <td>StockTypeName</td>
                 <td>StockUnitId</td>
+                // <td>StockUnitDescription</td>
                 <td>ShelfInformation</td>
                 <td>CabinetInformation</td>
                 <td>Amount</td>
@@ -44,7 +46,13 @@
                         @stockCard.StockTypeId
                     </td>
                     <td>
+                        @stockCard.StockTypeCode
+                    </td>
+                    <td>
                         @stockCard.StockUnitId
+                    </td>
+                    <td>
+                        @stockCard.StockUnitDescription
                     </td>
                     <td>
                         @stockCard.ShelfInformation

@@ -40,7 +40,30 @@ namespace StockApp.Front.Controllers
 
             return View();
         }
+        public async Task<IActionResult> Get(Guid id)
+        {
+            var token = User.Claims.FirstOrDefault(x => x.Type == "accesToken")?.Value;
+            if (token != null)
+            {
+                var client = _httpClientFactory.CreateClient();
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
+                var response = await client.GetAsync($"https://localhost:7038/api/StockTypes/{id}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonData = await response.Content.ReadAsStringAsync();
+                    var result = JsonSerializer.Deserialize<StockTypeListModel>(jsonData, new JsonSerializerOptions
+                    {
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                    });
+
+                    return View(result);
+                }
+            }
+
+            return RedirectToAction("List");
+        }
         public async Task<IActionResult> Remove(Guid id)
         {
             var token = User.Claims.FirstOrDefault(x => x.Type == "accesToken")?.Value;

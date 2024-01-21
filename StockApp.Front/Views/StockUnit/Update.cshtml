@@ -22,9 +22,11 @@
         <input type="text" class="form-control" asp-for="@Model.Type" />
     </div>
     <div class="mb-3">
-        <label for="@Model.StockTypeId" class="form-label">StockTypeId :</label>
-        <span asp-validation-for="@Model.StockTypeId" class="text-danger"></span>
-        <input type="text" class="form-control" asp-for="@Model.StockTypeId" />
+        <label for="StockTypeId" class="form-label">Stock Type:</label>
+        <span asp-validation-for="StockTypeId" class="text-danger"></span>
+        <select asp-for="StockTypeId" asp-items="@Model.StockTypeList" class="form-select">
+            <option value="">Select Stock Type</option>
+        </select>
     </div>
     <div class="mb-3">
         <label for="@Model.BuyingPrice" class="form-label">BuyingPrice :</label>

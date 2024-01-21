@@ -1,4 +1,5 @@
-﻿using StockApp.Front.Modals.Helper;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using StockApp.Front.Modals.Helper;
 
 namespace StockApp.Front.Modals
 {
@@ -8,6 +9,7 @@ namespace StockApp.Front.Modals
         public string? Description { get; set; }
         public StockUnitEnum? Type { get; set; }
         public string? StockTypeId { get; set; }
+        public List<SelectListItem>? StockTypeList { get; set; }
         public decimal? BuyingPrice { get; set; }
         public CurrencyEnum? BuyingCurrency { get; set; }
         public decimal? SellingPrice { get; set; }

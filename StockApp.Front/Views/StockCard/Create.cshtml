@@ -20,15 +20,20 @@
         <input type="text" class="form-control" asp-for="@Model.Description" />
     </div>
     <div class="mb-3">
-        <label for="@Model.StockTypeId" class="form-label">StockTypeId :</label>
-        <span asp-validation-for="@Model.StockTypeId" class="text-danger"></span>
-        <input type="text" class="form-control" asp-for="@Model.StockTypeId" />
-    </div>
+        <label for="StockTypeId" class="form-label">Stock Type:</label>
+        <span asp-validation-for="StockTypeId" class="text-danger"></span>
+        <select asp-for="StockTypeId" asp-items="@Model.StockTypeList" class="form-select">
+            <option value="">Select Stock Type</option>
+        </select>
+    </div> 
     <div class="mb-3">
-        <label for="@Model.StockUnitId" class="form-label">StockUnitId :</label>
-        <span asp-validation-for="@Model.StockUnitId" class="text-danger"></span>
-        <input type="text" class="form-control" asp-for="@Model.StockUnitId" />
+        <label for="StockUnitId" class="form-label">Stock Unit:</label>
+        <span asp-validation-for="StockUnitId" class="text-danger"></span>
+        <select asp-for="StockUnitId" asp-items="@Model.StockUnitList" class="form-select">
+            <option value="">Select Stock Unit</option>
+        </select>
     </div>
+ 
     <div class="mb-3">
         <label for="@Model.ShelfInformation" class="form-label">ShelfInformation :</label>
         <span asp-validation-for="@Model.ShelfInformation" class="text-danger"></span>
@@ -49,8 +54,9 @@
         <span asp-validation-for="@Model.CriticalQuantity" class="text-danger"></span>
         <input type="text" class="form-control" asp-for="@Model.CriticalQuantity" />
     </div>
-    <div class="mb-3">
-        <button class="btn btn-primary w-100">Kaydet</button>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Kayıt Oluştur</button>
+        <a asp-action="List" asp-controller="StockCard" class="btn btn-secondary">Listeye Geri Dön</a>
     </div>
 
     <div asp-validation-summary="ModelOnly" class="text-danger">

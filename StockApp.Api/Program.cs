@@ -12,18 +12,19 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using StockApp.Api.Infrastructure.Tools;
+using StockApp.Api.Persistance.ExceptionHandling;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 Log.Logger = new LoggerConfiguration()
-               .MinimumLevel.Debug()
-               .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-               .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
-               .Enrich.FromLogContext()
-               .WriteTo.Async(c => c.File("Persistance/Logs/logs.txt"))
-               .WriteTo.Async(c => c.Console())
-               .CreateLogger();
+    .MinimumLevel.Debug() // Geliþtirme ortamý için
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
+    .Enrich.FromLogContext()
+    .WriteTo.Async(c => c.File("Persistance/Logs/logs.txt"))
+    .WriteTo.Async(c => c.Console())
+    .CreateLogger();
 Log.Information("Starting web host.");
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -69,7 +70,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

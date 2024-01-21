@@ -4,6 +4,7 @@ using StockApp.Api.Core.Application.Features.CQRS.Command.StockCardRequests;
 using StockApp.Api.Core.Application.Features.CQRS.Command.StockTypeRequests;
 using StockApp.Api.Core.Application.Interfaces;
 using StockApp.Api.Core.Domain;
+using StockApp.Api.Persistance.ExceptionHandling;
 
 namespace StockApp.Api.Core.Application.Features.CQRS.Handlers.StockCardHandlers
 {
@@ -45,5 +46,6 @@ namespace StockApp.Api.Core.Application.Features.CQRS.Handlers.StockCardHandlers
 
             return Unit.Value;
         }
+    
     }
 }

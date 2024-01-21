@@ -4,6 +4,7 @@ using StockApp.Api.Core.Application.Features.CQRS.Command.StockCardRequests;
 using StockApp.Api.Core.Application.Features.CQRS.Command.StockTypeRequests;
 using StockApp.Api.Core.Application.Interfaces;
 using StockApp.Api.Core.Domain;
+using StockApp.Api.Persistance.ExceptionHandling;
 
 namespace StockApp.Api.Core.Application.Features.CQRS.Handlers.StockCardHandlers
 {
@@ -18,6 +19,7 @@ namespace StockApp.Api.Core.Application.Features.CQRS.Handlers.StockCardHandlers
         }
         public async Task<Unit> Handle(CreateStockCardCommandRequest request, CancellationToken cancellationToken)
         {
+            await Validation(request);
             await _repository.CreateAsync(new StockCard
             {
 
@@ -32,6 +34,11 @@ namespace StockApp.Api.Core.Application.Features.CQRS.Handlers.StockCardHandlers
                 CriticalQuantity = request.CriticalQuantity
             });
             return Unit.Value;
+        }
+        public async Task Validation(CreateStockCardCommandRequest request)
+        {
+            if(request.Code==null)
+            throw new SomeException("An error occurred...");
         }
     }
 }

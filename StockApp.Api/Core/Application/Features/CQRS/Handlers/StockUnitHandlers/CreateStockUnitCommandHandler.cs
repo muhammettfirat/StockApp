@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
+using StockApp.Api.Core.Application.Features.CQRS.Command.StockCardRequests;
 using StockApp.Api.Core.Application.Features.CQRS.Command.StockTypeRequests;
 using StockApp.Api.Core.Application.Features.CQRS.Command.StockUnitRequests;
 using StockApp.Api.Core.Application.Interfaces;
 using StockApp.Api.Core.Domain;
+using StockApp.Api.Persistance.ExceptionHandling;
 
 namespace StockApp.Api.Core.Application.Features.CQRS.Handlers.StockUnitHandlers
 {
@@ -18,6 +20,7 @@ namespace StockApp.Api.Core.Application.Features.CQRS.Handlers.StockUnitHandlers
         }
         public async Task<Unit> Handle(CreateStockUnitCommandRequest request, CancellationToken cancellationToken)
         {
+           await Validation(request);
             await _repository.CreateAsync(new StockUnit
             {
 
@@ -33,6 +36,11 @@ namespace StockApp.Api.Core.Application.Features.CQRS.Handlers.StockUnitHandlers
                 Approval = request.Approval,
             });
             return Unit.Value;
+        }
+        public async Task Validation(CreateStockUnitCommandRequest request)
+        {
+            if (request.Code == null)
+                throw new SomeException("An error occurred...");
         }
     }
 }

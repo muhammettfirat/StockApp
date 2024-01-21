@@ -3,12 +3,14 @@
     Layout = "_Layout";
 }
 
-@{
-    
-        <div class="text-end ">
-            <a asp-action="Create" class="btn btn-primary btn-sm" asp-controller="StockType">Yeni Kayıt Oluştur</a>
-        </div>
-        <table class="table">
+
+
+    <div id="loadingAnimation" class="loading-animation"></div>
+    <br />
+    <p>
+        <a asp-action="Create" style="color: white; padding: 8px 16px; background-color: #007bff; border: 1px solid #007bff; border-radius: 4px; text-decoration: none;">Yeni Kayıt</a>
+    </p>
+    <table id="dataTable" class="table" style="width: 80%; height:90%; border-collapse: collapse; margin-bottom: 1rem; color: #000;">
             <thead>
                 <tr>
                     <td>Id</td>
@@ -33,7 +35,9 @@
                        
                         <td>
                             <a asp-action="Update" asp-controller="StockType" asp-route-id="@stockType.Id" class="btn btn-warning btn-sm">Update</a>
-                            <a asp-action="Remove" asp-controller="StockType" asp-route-id="@stockType.Id" class="btn btn-danger btn-sm">Sil</a>
+                    <a asp-action="Remove" asp-controller="StockType" asp-route-id="@stockType.Id" class="btn btn-danger btn-sm">Sil</a>
+                        <a asp-action="Get" asp-controller="StockType" asp-route-id="@stockType.Id" class="btn btn-danger btn-sm">Detay</a>
+
                         </td>
                     </tr>
                 }
@@ -41,4 +45,77 @@
             </tbody>
         </table>
    
+    <div id="pagination" class="pagination" style="font-weight: bold; font-size: 20px; color: black;"></div>
+@section Scripts {
+    <script>
+        document.onreadystatechange = function () {
+            if (document.readyState === 'complete') {
+                // Yükleme tamamlandığında loading animasyonunu
+                setTimeout(function () {
+                    document.getElementById('loadingAnimation').style.display = 'none';
+                }, 1500);
+            }
+        };
+        var data = @Html.Raw(Json.Serialize(Model));
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const inputs = document.querySelectorAll('input[type="text"]');
+            inputs.forEach(input => {
+                input.addEventListener('input', function (e) {
+                    filterTable(input.name);
+                });
+            });
+        });
+
+      
+
+
+
+        const itemsPerPage = 5;
+        let currentPage = 1;
+
+        function displayTable(currentPage) {
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const paginatedData = data.slice(startIndex, endIndex);
+
+            paginatedData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                                           <td>${item.id}</td>
+                                                <td>${item.name}</td>
+                                        <td>${item.approval}</td>
+                                        <td>
+                                                    <a href="StockType/Update/${item.id}" class="btn btn-secondary">Düzenle</a>
+                                                    <a href="StockType/Get/${item.id}" class="btn btn-info">Detay</a>
+                                                    <a href="StockType/Remove/${item.id}" class="btn btn-danger">Sil</a>
+                                        </td>
+                                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function displayPagination() {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+
+            const pageCount = Math.ceil(data.length / itemsPerPage);
+            for (let i = 1; i <= pageCount; i++) {
+                const link = document.createElement('a');
+                link.href = '#';
+                link.textContent = i;
+                link.addEventListener('click', function () {
+                    currentPage = i;
+                    displayTable(currentPage);
+                });
+                pagination.appendChild(link);
+            }
+        }
+
+        displayTable(currentPage);
+        displayPagination();
+    </script>
 }

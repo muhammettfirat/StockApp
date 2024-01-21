@@ -3,26 +3,43 @@
     Layout = "_Layout";
 }
 
-<form class="w-75 m-5 p-3  mx-auto" asp-action="Update" asp-controller="StockType" method="post">
-    <input type="hidden" asp-for="@Model.Id" />
+<br />
+<br />
+<br />
+<div class="container" style="padding-left: 50px; padding-right: 50px;">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Update">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <div class="mb-3">
-        <label for="@Model.Name" class="form-label">Stock Türü :</label>
-        <span asp-validation-for="@Model.Name" class="text-danger"></span>
-        <input type="text" class="form-control" asp-for="@Model.Name" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Ad</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label asp-for="Approval" class="control-label">Approval</label>
+                    <input asp-for="Approval" class="form-control" />
+                    <span asp-validation-for="Approval" class="text-danger"></span>
+                </div>
+                <br />
+              
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    <a asp-action="List" class="btn btn-secondary">Listeye Geri Dön</a>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="@Model.Approval" class="form-label">Durum :</label>
-        <span asp-validation-for="@Model.Approval" class="text-danger"></span>
-        <input type="checkbox" class="form-control" asp-for="@Model.Approval" />
-    </div>
-   
 
-
-    <div class="mb-3">
-        <button class="btn btn-primary w-100">Kaydet</button>
-    </div>
-
-    <div asp-validation-summary="ModelOnly" class="text-danger">
-    </div>
-</form>
+</div>
+<br />
+<br />
+<br />
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
